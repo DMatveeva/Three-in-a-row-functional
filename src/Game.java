@@ -232,35 +232,4 @@ public class Game {
 
         return processCascade(newBoardState);
     }
-
-    public static void main(String[] args) {
-        Board board = new Board(8);
-        board.cells = new Element[][] {
-                {new Element('C'), new Element('A'), new Element('A'), new Element('C'), new Element('C'), new Element('A'), new Element('A'), new Element('C')},
-                {new Element('A'), new Element('B'), new Element('B'), new Element('A'), new Element('A'), new Element('B'), new Element('B'), new Element('A')},
-                {new Element('B'), new Element('A'), new Element('F'), new Element('A'), new Element('B'), new Element('A'), new Element('F'), new Element('A')},
-                {new Element('C'), new Element('B'), new Element('C'), new Element('E'), new Element('B'), new Element('C'), new Element('C'), new Element('E')},
-                {new Element('A'), new Element('A'), new Element('C'), new Element('G'), new Element('B'), new Element('E'), new Element('B'), new Element('D')},
-                {new Element('B'), new Element('C'), new Element('B'), new Element('G'), new Element('A'), new Element('B'), new Element('C'), new Element('E')},
-                {new Element('C'), new Element('D'), new Element('C'), new Element('E'), new Element('C'), new Element('C'), new Element('C'), new Element('D')},
-                {new Element('C'), new Element('C'), new Element('A'), new Element('E'), new Element('C'), new Element('B'), new Element('C'), new Element('E')},
-        };
-        Game.draw(board);
-
-        BoardState boardState = new BoardState(board, 0);
-        BoardState newBoardState = processCascade(boardState);
-
-        Game.draw(newBoardState.board);
-        System.out.println(newBoardState.score);
-    }
 }
-
-//Задание: реализуйте ProcessCascade() с использованием ранее описанных функций.
-/*
-* ProcessCascade:
-
-findMatches
-removeMatches
-fillEmptySpaces
-processCascade
-*/
