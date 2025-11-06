@@ -225,10 +225,7 @@ public class Game {
             return boardState;
         }
         BoardState boardStateAfterRemoval = removeMatches(boardState, matches);
-        Game.draw(boardStateAfterRemoval.board);
-
         BoardState newBoardState = fillEmptySpaces(boardStateAfterRemoval);
-        Game.draw(newBoardState.board);
 
         return processCascade(newBoardState);
     }
