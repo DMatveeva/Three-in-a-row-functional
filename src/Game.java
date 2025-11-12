@@ -66,8 +66,14 @@ public class Game {
         return bb;
     }
 
-    public static BoardState initializeGame() {
-        return null;
+    public static BoardState initializeGame(int boardSize) {
+        return processCascade(
+                fillEmptySpaces(
+                        new BoardState(
+                                new Board(boardSize),
+                                0)
+                )
+        );
     }
 
     public static List<Match> findMatches(Board board) {
