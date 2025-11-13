@@ -7,8 +7,7 @@ public class Element {
         symbol = c;
     }
 
-    public Element(Element e) {
+    public Element(Element e) { // копирующий конструктор
         symbol = e.symbol;
     }
-    //TODO make this copy by value
 }

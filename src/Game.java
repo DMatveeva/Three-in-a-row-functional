@@ -22,18 +22,6 @@ public class Game {
         System.out.println();
     }
 
-    public static void draw4(Board board) {
-        System.out.println("  0 1 2 3");
-        for (int i = 0; i < 4; i++) {
-            System.out.print(i + " ");
-            for (int j = 0; j < 4; j++) {
-                System.out.print(board.cells[i][j].symbol + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     public static Board cloneBoard(Board board) {
         Board b = new Board(board.size);
         for (int row = 0; row < board.size; row++) {
@@ -67,13 +55,11 @@ public class Game {
     }
 
     public static BoardState initializeGame(int boardSize) {
-        return processCascade(
-                fillEmptySpaces(
-                        new BoardState(
-                                new Board(boardSize),
-                                0)
-                )
-        );
+
+        Board board = new Board(boardSize);
+        return new BoardState(board, 0)
+                .fillEmptySpaces()
+                .processCascade();
     }
 
     public static List<Match> findMatches(Board board) {
@@ -135,14 +121,14 @@ public class Game {
         return matches;
     }
 
-    private static void addMatchIfValid(List<Match> matches, int row, int col, int length, MatchDirection direction) {
+    public static void addMatchIfValid(List<Match> matches, int row, int col, int length, MatchDirection direction) {
         // Учитываем только комбинации из 3 и более элементов (ТЗ)
         if (length >= 3) {
             matches.add(new Match(direction, row, col, length));
         }
     }
 
-    public static BoardState removeMatches(BoardState currentState, List<Match> matches) {
+    /*public static BoardState removeMatches(BoardState currentState, List<Match> matches) {
         if (matches == null || matches.isEmpty())
             return currentState;
 
@@ -160,10 +146,10 @@ public class Game {
         Board newBoard = new Board(currentState.board.size);
         newBoard.cells = gravityAppliedCells;
         return new BoardState(newBoard, newScore);
-    }
+    }*/
 
-    private static Element[][] markCellsForRemoval(Board board, List<Match> matches) {
-        Element[][] newCells = (Element[][]) board.cells.clone();
+    public static Element[][] markCellsForRemoval(Board board, List<Match> matches) {
+        Element[][] newCells = board.cells.clone();
 
         for (Match match : matches) {
             for (int i = 0; i < match.length; i++) {
@@ -177,7 +163,7 @@ public class Game {
         return newCells;
     }
 
-    private static Element[][] applyGravity(Element[][] cells, int size) {
+    public static Element[][] applyGravity(Element[][] cells, int size) {
         Element[][] newCells = new Element[size][size];
 
         for (int row = 0; row < size; row++) {
@@ -199,12 +185,12 @@ public class Game {
         return newCells;
     }
 
-    private static int calculateScore(int removedCount) {
+    public static int calculateScore(int removedCount) {
         // Базовая система подсчета очков: 10 за каждый элемент
         return removedCount * 10;
     }
 
-    public static BoardState fillEmptySpaces(BoardState currentState) {
+/*    public static BoardState fillEmptySpaces(BoardState currentState) {
         if (currentState.board.cells == null)
             return currentState;
 
@@ -222,9 +208,9 @@ public class Game {
         Board newBoard = new Board(currentState.board.size);
         newBoard.cells = newCells;
         return new BoardState(newBoard, currentState.score);
-    }
+    }*/
 
-    public static BoardState processCascade(BoardState boardState) {
+/*    public static BoardState processCascade(BoardState boardState) {
         Board board = boardState.board;
         List<Match> matches = findMatches(board);
         if (matches.isEmpty()) {
@@ -234,5 +220,5 @@ public class Game {
         BoardState newBoardState = fillEmptySpaces(boardStateAfterRemoval);
 
         return processCascade(newBoardState);
-    }
+    }*/
 }
